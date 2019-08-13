@@ -69,8 +69,9 @@ defmodule Phauxth.Authenticate.Base do
 
       @impl Plug
       def init(opts) do
-        {Keyword.get(opts, :user_context, Config.user_context()),
-         Keyword.get(opts, :log_meta, []), opts}
+        user_context = Map.fetch!(Config.user_context(), opts)
+        {user_context,
+         [], opts}
       end
 
       @impl Plug

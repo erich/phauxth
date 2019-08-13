@@ -38,7 +38,7 @@ defmodule Phauxth.Login.Base do
       def verify(params, opts \\ [])
 
       def verify(%{"password" => _password} = params, opts) do
-        user_context = Keyword.get(opts, :user_context, Config.user_context())
+        user_context = Map.fetch!(Config.user_context(), :admin)
         log_meta = Keyword.get(opts, :log_meta, [])
         params |> authenticate(user_context, opts) |> report(log_meta)
       end
